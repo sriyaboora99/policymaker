@@ -29,7 +29,7 @@ export function AppLayout({ children }: AppLayoutProps) {
               <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
               <div className="hidden sm:block">
                 <h1 className="text-lg font-semibold text-foreground">
-                  Adaptive Policy Impact Simulator
+                  Policy Impact Simulator
                 </h1>
               </div>
             </div>

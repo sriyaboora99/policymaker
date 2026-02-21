@@ -9,7 +9,8 @@ import {
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
-  Settings
+  Settings,
+  Database
 } from 'lucide-react';
 import {
   Sidebar,
@@ -70,6 +71,12 @@ const modules = [
     icon: AlertTriangle,
     description: 'Early warnings'
   },
+  { 
+    title: 'Database', 
+    url: '/database', 
+    icon: Database,
+    description: 'System data registry'
+  },
 ];
 
 const roleLabels = {
@@ -95,8 +102,8 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <div className="flex flex-col">
-              <span className="text-sm font-semibold text-sidebar-foreground">Policy Simulator</span>
-              <span className="text-xs text-sidebar-foreground/60">Impact Analysis</span>
+              <span className="text-sm font-semibold text-sidebar-foreground">Policy Impact</span>
+              <span className="text-xs text-sidebar-foreground/60">Simulator</span>
             </div>
           )}
         </div>

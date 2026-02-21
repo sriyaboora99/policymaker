@@ -12,6 +12,7 @@ import { SimulationEngine } from "@/pages/SimulationEngine";
 import { ImpactAnalysis } from "@/pages/ImpactAnalysis";
 import { WhatIfComparison } from "@/pages/WhatIfComparison";
 import { RiskAlerts } from "@/pages/RiskAlerts";
+import { DatabaseView } from "@/pages/DatabaseView";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +33,7 @@ const App = () => (
               <Route path="/impact" element={<ImpactAnalysis />} />
               <Route path="/comparison" element={<WhatIfComparison />} />
               <Route path="/alerts" element={<RiskAlerts />} />
+              <Route path="/database" element={<DatabaseView />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </AppLayout>
