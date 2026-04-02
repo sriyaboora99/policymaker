@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, ArrowRight, Loader2 } from 'lucide-react';
+import { Shield, ArrowRight, Loader2, Users, FileText, BarChart3 } from 'lucide-react';
 
 export function Auth() {
   const { user, loading, signIn, signUp } = useAuth();
@@ -56,6 +56,21 @@ export function Auth() {
           <p className="text-sm text-muted-foreground">
             Decision support for government schemes
           </p>
+        </div>
+
+        {/* Role views info */}
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { icon: FileText, label: 'Policymaker', desc: 'Create & edit schemes' },
+            { icon: Users, label: 'Implementing Agency', desc: 'Track adoption & rollout' },
+            { icon: BarChart3, label: 'Researcher', desc: 'Analyze impact data' },
+          ].map(({ icon: Icon, label, desc }) => (
+            <div key={label} className="flex flex-col items-center gap-1.5 rounded-xl border border-border/60 bg-muted/40 p-3 text-center">
+              <Icon className="h-5 w-5 text-primary" />
+              <span className="text-xs font-semibold text-foreground">{label}</span>
+              <span className="text-[10px] text-muted-foreground leading-tight">{desc}</span>
+            </div>
+          ))}
         </div>
 
         <Card className="rounded-2xl border-border/60">
@@ -116,6 +131,10 @@ export function Auth() {
             </div>
           </CardContent>
         </Card>
+
+        <p className="text-center text-xs text-muted-foreground">
+          Switch between views anytime after signing in
+        </p>
       </div>
     </div>
   );
