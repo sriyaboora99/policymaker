@@ -18,6 +18,7 @@ const roleLabels = {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const { userRole, alerts } = useSimulator();
+  const { signOut } = useAuth();
   const activeAlerts = alerts.filter(a => a.level === 'high' || a.level === 'medium').length;
 
   return (
