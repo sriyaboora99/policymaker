@@ -109,7 +109,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
         .maybeSingle();
 
       if (profile) {
-        setUserRole(profile.role as UserRole);
+        setUserRoleState(profile.role as UserRole);
       } else {
         // First login after signup — create profile with pending role
         const pendingRole = localStorage.getItem('pending_role') || 'policymaker';
