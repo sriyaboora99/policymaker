@@ -82,3 +82,96 @@ APIS introduces a **predictive behavioral simulation engine** that:
 
 ### 🔄 Behavioral Simulation Engine
 - Simulates real-world flow:
+Simulation → Insights → Policy Changes → Re-Simulation
+
+This creates a **closed-loop adaptive system** for continuous improvement.
+
+---
+
+## 🏗️ System Architecture
+
+<p align="center">
+  <img src="docs/architecture.png" width="700"/>
+</p>
+
+---
+
+## 📊 Application Screenshots
+
+<p align="center">
+  <img src="docs/dashboard.png" width="400"/>
+  <img src="docs/simulation.png" width="400"/>
+</p>
+
+---
+
+## ⚙️ Tech Stack
+
+### 🎨 Frontend
+- React.js  
+- TypeScript  
+- Tailwind CSS  
+- shadcn-ui  
+- Recharts / Chart.js  
+
+### ⚙️ Backend
+- FastAPI (Python)  
+
+### 🧠 Simulation & Modeling
+- Probability-Based Modeling  
+- Monte Carlo Simulation  
+- K-Means Clustering  
+- Rule-Based Logic  
+
+### 🗄️ Database
+- PostgreSQL  
+- Redis (optional)  
+
+---
+
+## 🧪 Simulation Logic (Simplified)
+
+adoption_probability = awareness * trust * (1 - complexity)
+
+## 📈 Impact
+
+- Predicts policy success before real-world rollout  
+- Reduces risk of policy failure  
+- Improves citizen adoption rates  
+- Optimizes resource allocation  
+- Enables evidence-based policymaking  
+
+---
+
+## 🔮 Future Scope
+
+- AI-based adaptive policy tuning  
+- Real-time data integration  
+- Regional and demographic personalization  
+- Integration with government databases and systems  
+- Advanced behavioral modeling using reinforcement learning  
+
+---
+
+## 🛠️ Run Locally
+git clone <your-repo-link>  
+cd project-folder  
+npm install  
+npm run dev  
+
+---
+
+## 👥 Contributors
+Sriya Boora  
+Rupa Pellati
+Abhigna Netha
+
+---
+
+## ⭐ Why This Project Matters
+This system transforms governance from reactive decision-making to proactive intelligence.
+
+---
+
+## 📜 License
+This project is developed for academic and research purposes.
