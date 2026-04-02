@@ -139,6 +139,14 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
     }).eq('id', policy.id);
   };
 
+  const deletePolicy = async (policyId: string) => {
+    setPolicies(prev => prev.filter(p => p.id !== policyId));
+    setSimulations(prev => prev.filter(s => s.policyId !== policyId));
+    if (currentPolicy?.id === policyId) setCurrentPolicy(null);
+    await supabase.from('simulation_results').delete().eq('policy_id', policyId);
+    await supabase.from('policies').delete().eq('id', policyId);
+  };
+
   const addSimulation = async (result: SimulationResult) => {
     if (!user) return;
     setSimulations(prev => [result, ...prev]);
