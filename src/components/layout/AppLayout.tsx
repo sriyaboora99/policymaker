@@ -59,6 +59,10 @@ export function AppLayout({ children }: AppLayoutProps) {
                   {roleLabels[userRole]}
                 </span>
               </div>
+
+              <Button variant="ghost" size="icon" className="rounded-xl text-muted-foreground hover:text-destructive" onClick={signOut} title="Sign out">
+                <LogOut className="h-4 w-4" />
+              </Button>
             </div>
           </header>
           
