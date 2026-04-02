@@ -9,7 +9,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { RiskBadge } from '@/components/shared/RiskBadge';
 import { useSimulator } from '@/context/SimulatorContext';
 import { Policy, SimulationResult, SyntheticCitizen, RiskLevel } from '@/types/policy';
-import { Search, ArrowUpDown, Database, FileText, Play, Users, Eye } from 'lucide-react';
+import { Search, ArrowUpDown, Database, FileText, Play, Users, Eye, Trash2 } from 'lucide-react';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 
 type SortDir = 'asc' | 'desc';
 
