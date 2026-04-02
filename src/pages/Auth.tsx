@@ -6,13 +6,23 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Shield, ArrowRight, Loader2, Users, FileText, BarChart3 } from 'lucide-react';
+import { Shield, ArrowRight, Loader2, Users, FileText, BarChart3, Check } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import { UserRole } from '@/types/policy';
+import { cn } from '@/lib/utils';
+
+const roles: { value: UserRole; icon: typeof FileText; label: string; desc: string }[] = [
+  { value: 'policymaker', icon: FileText, label: 'Policymaker', desc: 'Create & edit schemes' },
+  { value: 'implementing_agency', icon: Users, label: 'Implementing Agency', desc: 'Track adoption & rollout' },
+  { value: 'researcher', icon: BarChart3, label: 'Researcher', desc: 'Analyze impact data' },
+];
 
 export function Auth() {
   const { user, loading, signIn, signUp } = useAuth();
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [selectedRole, setSelectedRole] = useState<UserRole>('policymaker');
   const [submitting, setSubmitting] = useState(false);
   const { toast } = useToast();
 
@@ -30,16 +40,22 @@ export function Auth() {
     e.preventDefault();
     setSubmitting(true);
 
-    const { error } = isSignUp
-      ? await signUp(email, password)
-      : await signIn(email, password);
-
-    setSubmitting(false);
-
-    if (error) {
-      toast({ title: 'Error', description: error.message, variant: 'destructive' });
-    } else if (isSignUp) {
-      toast({ title: 'Check your email', description: 'We sent you a confirmation link to verify your account.' });
+    if (isSignUp) {
+      const { error } = await signUp(email, password);
+      setSubmitting(false);
+      if (error) {
+        toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      } else {
+        // Store selected role in localStorage to persist after email confirmation
+        localStorage.setItem('pending_role', selectedRole);
+        toast({ title: 'Check your email', description: 'We sent you a confirmation link to verify your account.' });
+      }
+    } else {
+      const { error } = await signIn(email, password);
+      setSubmitting(false);
+      if (error) {
+        toast({ title: 'Error', description: error.message, variant: 'destructive' });
+      }
     }
   };
 
@@ -58,21 +74,6 @@ export function Auth() {
           </p>
         </div>
 
-        {/* Role views info */}
-        <div className="grid grid-cols-3 gap-3">
-          {[
-            { icon: FileText, label: 'Policymaker', desc: 'Create & edit schemes' },
-            { icon: Users, label: 'Implementing Agency', desc: 'Track adoption & rollout' },
-            { icon: BarChart3, label: 'Researcher', desc: 'Analyze impact data' },
-          ].map(({ icon: Icon, label, desc }) => (
-            <div key={label} className="flex flex-col items-center gap-1.5 rounded-xl border border-border/60 bg-muted/40 p-3 text-center">
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-xs font-semibold text-foreground">{label}</span>
-              <span className="text-[10px] text-muted-foreground leading-tight">{desc}</span>
-            </div>
-          ))}
-        </div>
-
         <Card className="rounded-2xl border-border/60">
           <CardHeader className="pb-4">
             <CardTitle className="text-lg">
@@ -80,12 +81,41 @@ export function Auth() {
             </CardTitle>
             <CardDescription>
               {isSignUp
-                ? 'Enter your email to get started'
+                ? 'Choose your role and enter your details'
                 : 'Enter your credentials to continue'}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
+              {isSignUp && (
+                <div className="space-y-2">
+                  <Label>Your Role</Label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {roles.map(({ value, icon: Icon, label, desc }) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setSelectedRole(value)}
+                        className={cn(
+                          'relative flex flex-col items-center gap-1.5 rounded-xl border p-3 text-center transition-all',
+                          selectedRole === value
+                            ? 'border-primary bg-primary/5 ring-2 ring-primary/20'
+                            : 'border-border/60 bg-muted/40 hover:border-border'
+                        )}
+                      >
+                        {selectedRole === value && (
+                          <div className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary">
+                            <Check className="h-3 w-3 text-primary-foreground" />
+                          </div>
+                        )}
+                        <Icon className={cn('h-5 w-5', selectedRole === value ? 'text-primary' : 'text-muted-foreground')} />
+                        <span className="text-xs font-semibold text-foreground">{label}</span>
+                        <span className="text-[10px] text-muted-foreground leading-tight">{desc}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -131,10 +161,6 @@ export function Auth() {
             </div>
           </CardContent>
         </Card>
-
-        <p className="text-center text-xs text-muted-foreground">
-          Switch between views anytime after signing in
-        </p>
       </div>
     </div>
   );
