@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from './AppSidebar';
 import { useSimulator } from '@/context/SimulatorContext';
-import { Bell, User, Search } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { Bell, User, Search, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface AppLayoutProps {
@@ -17,6 +18,7 @@ const roleLabels = {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const { userRole, alerts } = useSimulator();
+  const { signOut } = useAuth();
   const activeAlerts = alerts.filter(a => a.level === 'high' || a.level === 'medium').length;
 
   return (
@@ -57,6 +59,10 @@ export function AppLayout({ children }: AppLayoutProps) {
                   {roleLabels[userRole]}
                 </span>
               </div>
+
+              <Button variant="ghost" size="icon" className="rounded-xl text-muted-foreground hover:text-destructive" onClick={signOut} title="Sign out">
+                <LogOut className="h-4 w-4" />
+              </Button>
             </div>
           </header>
           

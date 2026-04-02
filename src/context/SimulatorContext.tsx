@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Policy, SyntheticCitizen, SimulationResult, PopulationDistribution, UserRole, RiskAlert } from '@/types/policy';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/context/AuthContext';
 
 interface SimulatorState {
   userRole: UserRole;
@@ -76,6 +77,7 @@ function simulationFromRow(row: any): SimulationResult {
 const SimulatorContext = createContext<SimulatorState | undefined>(undefined);
 
 export function SimulatorProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [userRole, setUserRole] = useState<UserRole>('policymaker');
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [currentPolicy, setCurrentPolicy] = useState<Policy | null>(null);
@@ -99,6 +101,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addPolicy = async (policy: Policy) => {
+    if (!user) return;
     setPolicies(prev => [policy, ...prev]);
     await supabase.from('policies').insert({
       id: policy.id,
@@ -113,6 +116,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
       expected_adoption_percentage: policy.expectedAdoptionPercentage,
       rollout_duration_days: policy.rolloutDurationDays,
       assumptions: policy.assumptions as any,
+      user_id: user.id,
     });
   };
 
@@ -135,6 +139,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
   };
 
   const addSimulation = async (result: SimulationResult) => {
+    if (!user) return;
     setSimulations(prev => [result, ...prev]);
     await supabase.from('simulation_results').insert({
       id: result.id,
@@ -147,6 +152,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
       time_series_data: result.timeSeriesData as any,
       cost_per_beneficiary: result.costPerBeneficiary,
       budget_utilization: result.budgetUtilization,
+      user_id: user.id,
     });
   };
 

@@ -29,6 +29,7 @@ export type Database = {
           rollout_duration_days: number
           target_population: number
           updated_at: string
+          user_id: string | null
           version: number
         }
         Insert: {
@@ -45,6 +46,7 @@ export type Database = {
           rollout_duration_days?: number
           target_population: number
           updated_at?: string
+          user_id?: string | null
           version?: number
         }
         Update: {
@@ -61,6 +63,7 @@ export type Database = {
           rollout_duration_days?: number
           target_population?: number
           updated_at?: string
+          user_id?: string | null
           version?: number
         }
         Relationships: []
@@ -78,6 +81,7 @@ export type Database = {
           stages: Json
           time_series_data: Json
           total_population: number
+          user_id: string | null
         }
         Insert: {
           adoption_rate: number
@@ -91,6 +95,7 @@ export type Database = {
           stages?: Json
           time_series_data?: Json
           total_population: number
+          user_id?: string | null
         }
         Update: {
           adoption_rate?: number
@@ -104,6 +109,7 @@ export type Database = {
           stages?: Json
           time_series_data?: Json
           total_population?: number
+          user_id?: string | null
         }
         Relationships: [
           {
