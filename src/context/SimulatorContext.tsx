@@ -89,9 +89,31 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
   const [alerts, setAlerts] = useState<RiskAlert[]>([]);
   const [comparisonPolicyId, setComparisonPolicyId] = useState<string | null>(null);
 
-  // Load policies and simulations from DB on mount
+  // Load user profile role, policies and simulations from DB on mount
   useEffect(() => {
     async function load() {
+      if (!user) return;
+
+      // Load or create user profile with role
+      const { data: profile } = await supabase
+        .from('user_profiles')
+        .select('role')
+        .eq('user_id', user.id)
+        .maybeSingle();
+
+      if (profile) {
+        setUserRole(profile.role as UserRole);
+      } else {
+        // First login after signup — create profile with pending role
+        const pendingRole = localStorage.getItem('pending_role') || 'policymaker';
+        localStorage.removeItem('pending_role');
+        await supabase.from('user_profiles').insert({
+          user_id: user.id,
+          role: pendingRole,
+        });
+        setUserRole(pendingRole as UserRole);
+      }
+
       const { data: policyRows } = await supabase.from('policies').select('*').order('created_at', { ascending: false });
       if (policyRows) setPolicies(policyRows.map(policyFromRow));
 
@@ -99,7 +121,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
       if (simRows) setSimulations(simRows.map(simulationFromRow));
     }
     load();
-  }, []);
+  }, [user]);
 
   const addPolicy = async (policy: Policy) => {
     if (!user) return;
