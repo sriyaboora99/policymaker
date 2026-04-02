@@ -10,6 +10,7 @@ interface SimulatorState {
   currentPolicy: Policy | null;
   addPolicy: (policy: Policy) => void;
   updatePolicy: (policy: Policy) => void;
+  deletePolicy: (policyId: string) => void;
   setCurrentPolicy: (policy: Policy | null) => void;
   population: SyntheticCitizen[];
   populationDistribution: PopulationDistribution;
