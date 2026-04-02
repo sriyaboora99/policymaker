@@ -139,6 +139,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
   };
 
   const addSimulation = async (result: SimulationResult) => {
+    if (!user) return;
     setSimulations(prev => [result, ...prev]);
     await supabase.from('simulation_results').insert({
       id: result.id,
@@ -151,6 +152,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
       time_series_data: result.timeSeriesData as any,
       cost_per_beneficiary: result.costPerBeneficiary,
       budget_utilization: result.budgetUtilization,
+      user_id: user.id,
     });
   };
 
