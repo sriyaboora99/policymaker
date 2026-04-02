@@ -1,73 +1,84 @@
-# Welcome to your Lovable project
+<h1 align="center">🚀 Adaptive Policy Impact Simulator (APIS)</h1>
+<p align="center">
+A Behavioral Simulation Framework for Predictive Evaluation of Government Schemes
+</p>
 
-## Project info
+<p align="center">
+  <a href="https://policymaker.lovable.app">
+    <img src="https://img.shields.io/badge/Live-Demo-blue?style=for-the-badge&logo=vercel" />
+  </a>
+  <img src="https://img.shields.io/badge/Tech-React%20%7C%20FastAPI%20%7C%20ML-green?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" />
+</p>
 
-**URL**: https://policymaker.lovable.app
+---
 
-## How can I edit this code?
+## 🌐 Live Demo
+👉 https://policymaker.lovable.app
 
-There are several ways of editing your application.
+---
 
-**Use Lovable**
+## 📌 Overview
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Adaptive Policy Impact Simulator (APIS) is an intelligent simulation system designed to evaluate government schemes *before deployment*.
 
-Changes made via Lovable will be committed automatically to this repo.
+Unlike traditional systems that analyze outcomes post-implementation, APIS:
 
-**Use your preferred IDE**
+✔ Simulates real human behavior  
+✔ Predicts adoption gaps  
+✔ Identifies policy failure points  
+✔ Enables data-driven optimization  
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+---
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## ❗ Problem Statement
 
-Follow these steps:
+Government schemes often fail due to:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Low awareness among citizens  
+- Lack of trust in systems  
+- Complex documentation processes  
+- Limited digital literacy  
+- Accessibility constraints  
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+📉 Existing systems detect these failures *after deployment*, causing:
+- Resource wastage  
+- Delayed corrections  
+- Reduced policy effectiveness  
 
-# Step 3: Install the necessary dependencies.
-npm i
+---
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## 💡 Our Solution
 
-**Edit a file directly in GitHub**
+APIS introduces a **predictive behavioral simulation engine** that:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+- Models citizen decision-making  
+- Simulates adoption stages  
+- Detects drop-offs in advance  
+- Enables What-If scenario testing  
+- Creates a feedback loop for optimization  
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 🧠 Core Idea
 
-## What technologies are used for this project?
+> “We don’t just analyze policies — we simulate people.”
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🚀 Key Features
 
-## How can I deploy this project?
+### 🧾 Policy Configuration
+- Define eligibility criteria, benefits, and assumptions  
+- Configure rollout strategies  
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### 👥 Synthetic Population Generator
+- Creates virtual citizens  
+- Models:
+  - Income  
+  - Literacy  
+  - Trust  
+  - Accessibility  
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### 🔄 Behavioral Simulation Engine
+- Simulates real-world flow:
