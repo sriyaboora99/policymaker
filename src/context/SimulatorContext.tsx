@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Policy, SyntheticCitizen, SimulationResult, PopulationDistribution, UserRole, RiskAlert } from '@/types/policy';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/context/AuthContext';
 
 interface SimulatorState {
   userRole: UserRole;
