@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 import { SidebarProvider, SidebarTrigger, SidebarInset } from '@/components/ui/sidebar';
 import { AppSidebar } from './AppSidebar';
 import { useSimulator } from '@/context/SimulatorContext';
-import { Bell, User, Search } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
+import { Bell, User, Search, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface AppLayoutProps {
