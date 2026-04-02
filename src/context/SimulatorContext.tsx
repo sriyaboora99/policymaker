@@ -169,7 +169,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
     <SimulatorContext.Provider
       value={{
         userRole, setUserRole,
-        policies, currentPolicy, addPolicy, updatePolicy, setCurrentPolicy,
+        policies, currentPolicy, addPolicy, updatePolicy, deletePolicy, setCurrentPolicy,
         population, populationDistribution, setPopulation, setPopulationDistribution,
         simulations, currentSimulation, addSimulation, setCurrentSimulation,
         alerts, setAlerts,
