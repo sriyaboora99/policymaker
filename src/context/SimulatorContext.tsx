@@ -118,7 +118,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
           user_id: user.id,
           role: pendingRole,
         });
-        setUserRole(pendingRole as UserRole);
+        setUserRoleState(pendingRole as UserRole);
       }
 
       const { data: policyRows } = await supabase.from('policies').select('*').order('created_at', { ascending: false });
