@@ -79,7 +79,14 @@ const SimulatorContext = createContext<SimulatorState | undefined>(undefined);
 
 export function SimulatorProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
-  const [userRole, setUserRole] = useState<UserRole>('policymaker');
+  const [userRole, setUserRoleState] = useState<UserRole>('policymaker');
+
+  const setUserRole = (role: UserRole) => {
+    setUserRoleState(role);
+    if (user) {
+      supabase.from('user_profiles').update({ role }).eq('user_id', user.id);
+    }
+  };
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [currentPolicy, setCurrentPolicy] = useState<Policy | null>(null);
   const [population, setPopulation] = useState<SyntheticCitizen[]>([]);
