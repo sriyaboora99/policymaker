@@ -101,6 +101,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const addPolicy = async (policy: Policy) => {
+    if (!user) return;
     setPolicies(prev => [policy, ...prev]);
     await supabase.from('policies').insert({
       id: policy.id,
@@ -115,6 +116,7 @@ export function SimulatorProvider({ children }: { children: ReactNode }) {
       expected_adoption_percentage: policy.expectedAdoptionPercentage,
       rollout_duration_days: policy.rolloutDurationDays,
       assumptions: policy.assumptions as any,
+      user_id: user.id,
     });
   };
 
