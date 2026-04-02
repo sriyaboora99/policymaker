@@ -77,6 +77,7 @@ function simulationFromRow(row: any): SimulationResult {
 const SimulatorContext = createContext<SimulatorState | undefined>(undefined);
 
 export function SimulatorProvider({ children }: { children: ReactNode }) {
+  const { user } = useAuth();
   const [userRole, setUserRole] = useState<UserRole>('policymaker');
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [currentPolicy, setCurrentPolicy] = useState<Policy | null>(null);
