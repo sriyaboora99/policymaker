@@ -151,7 +151,7 @@ interface PersonaRow {
 }
 
 export function DatabaseView() {
-  const { policies, simulations, population, alerts } = useSimulator();
+  const { policies, simulations, population, alerts, deletePolicy } = useSimulator();
 
   const [filter, setFilter] = useState('');
   const [selectedPolicy, setSelectedPolicy] = useState<Policy | null>(null);
