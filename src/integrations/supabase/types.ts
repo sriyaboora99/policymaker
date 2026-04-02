@@ -14,7 +14,107 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      policies: {
+        Row: {
+          assumptions: Json
+          benefit_type: string
+          benefit_value: number
+          created_at: string
+          documents_required: number
+          eligibility: Json
+          expected_adoption_percentage: number
+          geographic_scope: string
+          id: string
+          name: string
+          rollout_duration_days: number
+          target_population: number
+          updated_at: string
+          version: number
+        }
+        Insert: {
+          assumptions?: Json
+          benefit_type: string
+          benefit_value?: number
+          created_at?: string
+          documents_required?: number
+          eligibility?: Json
+          expected_adoption_percentage?: number
+          geographic_scope: string
+          id: string
+          name: string
+          rollout_duration_days?: number
+          target_population: number
+          updated_at?: string
+          version?: number
+        }
+        Update: {
+          assumptions?: Json
+          benefit_type?: string
+          benefit_value?: number
+          created_at?: string
+          documents_required?: number
+          eligibility?: Json
+          expected_adoption_percentage?: number
+          geographic_scope?: string
+          id?: string
+          name?: string
+          rollout_duration_days?: number
+          target_population?: number
+          updated_at?: string
+          version?: number
+        }
+        Relationships: []
+      }
+      simulation_results: {
+        Row: {
+          adoption_rate: number
+          budget_utilization: number
+          cost_per_beneficiary: number
+          created_at: string
+          eligible_population: number
+          final_beneficiaries: number
+          id: string
+          policy_id: string
+          stages: Json
+          time_series_data: Json
+          total_population: number
+        }
+        Insert: {
+          adoption_rate: number
+          budget_utilization?: number
+          cost_per_beneficiary?: number
+          created_at?: string
+          eligible_population: number
+          final_beneficiaries: number
+          id: string
+          policy_id: string
+          stages?: Json
+          time_series_data?: Json
+          total_population: number
+        }
+        Update: {
+          adoption_rate?: number
+          budget_utilization?: number
+          cost_per_beneficiary?: number
+          created_at?: string
+          eligible_population?: number
+          final_beneficiaries?: number
+          id?: string
+          policy_id?: string
+          stages?: Json
+          time_series_data?: Json
+          total_population?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "simulation_results_policy_id_fkey"
+            columns: ["policy_id"]
+            isOneToOne: false
+            referencedRelation: "policies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
