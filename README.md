@@ -91,7 +91,7 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="docs/apis_arch.png" width="700"/>
+  <img src="apis_arch.png" width="700"/>
 </p>
 
 ---
