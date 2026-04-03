@@ -99,8 +99,8 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 ## 📊 Application Screenshots
 
 <p align="center">
-  <img src="docs/dashboard.png" width="400"/>
-  <img src="docs/simulation.png" width="400"/>
+  <img src="dashboard.png" width="400"/>
+  <img src="simulation.png" width="400"/>
 </p>
 
 ---
