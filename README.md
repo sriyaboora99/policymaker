@@ -100,7 +100,8 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 
 <p align="center">
   <img src="dashboard.png" width="400"/>
-  <img src="simulation.png" width="400"/>
+  <img src="simulation1.png" width="400"/>
+  <img src="simulation2.png" width="400"/>
 </p>
 
 ---
