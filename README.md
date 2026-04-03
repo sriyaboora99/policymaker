@@ -91,7 +91,7 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="docs/architecture.png" width="700"/>
+  <img src="docs/apis_arch.png" width="700"/>
 </p>
 
 ---
@@ -108,14 +108,22 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 ## ⚙️ Tech Stack
 
 ### 🎨 Frontend
-- React.js  
-- TypeScript  
-- Tailwind CSS  
-- shadcn-ui  
-- Recharts / Chart.js  
+- React 18  
+- TypeScript 5  
+- Vite 5 (Build Tool)  
+- Tailwind CSS v3  
+- shadcn/ui (UI Components)  
+- Recharts (Data Visualization)
 
 ### ⚙️ Backend
-- FastAPI (Python)  
+- FastAPI (Python)
+
+### 🔄 State Management
+- React Context API  
+- TanStack React Query
+
+### 🧭 Routing
+- React Router v6  
 
 ### 🧠 Simulation & Modeling
 - Probability-Based Modeling  
@@ -123,15 +131,17 @@ This creates a **closed-loop adaptive system** for continuous improvement.
 - K-Means Clustering  
 - Rule-Based Logic  
 
-### 🗄️ Database
-- PostgreSQL  
-- Redis (optional)  
+### 🗄️ Data Handling
+- Cloud Database (via Lovable)  
+- Real-time state synchronization 
 
 ---
 
 ## 🧪 Simulation Logic (Simplified)
 
 adoption_probability = awareness * trust * (1 - complexity)
+
+---
 
 ## 📈 Impact
 
@@ -162,14 +172,29 @@ npm run dev
 ---
 
 ## 👥 Contributors
-Sriya Boora  
-Rupa Pellati
-Abhigna Netha
+- Sriya Boora  
+- Rupa Pellati
+- Abhigna Netha
 
 ---
 
 ## ⭐ Why This Project Matters
-This system transforms governance from reactive decision-making to proactive intelligence.
+
+- Government schemes often fail not due to poor design, but because of behavioral and accessibility barriers such as low awareness, lack of trust, complex documentation, and limited digital literacy.  
+
+- Traditional policy evaluation methods are reactive, identifying inefficiencies only after deployment, leading to resource wastage and delayed corrective actions.  
+
+- This project introduces a proactive approach by simulating citizen behavior before real-world implementation, enabling early detection of adoption gaps and bottlenecks.  
+
+- It helps policymakers understand how real people interact with schemes, rather than assuming ideal conditions.  
+
+- The system reduces the risk of policy failure by allowing What-If scenario testing and iterative optimization through a feedback loop.  
+
+- It promotes data-driven decision-making, improving the effectiveness and efficiency of government policies.  
+
+- By incorporating explainable logic, the system ensures transparency and interpretability in policy analysis.  
+
+- Contributes to the advancement of digital governance by enabling smarter, more adaptive, and citizen-centric policy design.  
 
 ---
 
