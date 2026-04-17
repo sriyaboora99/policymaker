@@ -12,11 +12,14 @@ export interface PolicyAssumptions {
   digitalAccessibility: number; // 0-100
 }
 
+export type Caste = 'general' | 'obc' | 'sc' | 'st';
+
 export interface EligibilityCriteria {
   minAge: number;
   maxAge: number;
   maxIncome: number;
   occupations: string[];
+  castes: Caste[]; // Empty array = no caste restriction (all eligible)
 }
 
 export interface Policy {
@@ -42,6 +45,7 @@ export interface SyntheticCitizen {
   ageGroup: '18-25' | '26-35' | '36-45' | '46-55' | '56-65' | '65+';
   incomeTier: 'below_poverty' | 'low' | 'middle' | 'high';
   location: 'rural' | 'urban';
+  caste: Caste;
   
   // Capability attributes
   digitalLiteracy: number; // 0-1
@@ -59,6 +63,7 @@ export interface PopulationDistribution {
   ageGroups: Record<SyntheticCitizen['ageGroup'], number>;
   incomeTiers: Record<SyntheticCitizen['incomeTier'], number>;
   locations: Record<SyntheticCitizen['location'], number>;
+  castes: Record<Caste, number>;
   digitalLiteracyMean: number;
   documentReadinessMean: number;
 }
