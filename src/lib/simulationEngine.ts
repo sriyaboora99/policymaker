@@ -9,11 +9,14 @@ export function generatePopulation(
   const ageGroupKeys = Object.keys(distribution.ageGroups) as SyntheticCitizen['ageGroup'][];
   const incomeTierKeys = Object.keys(distribution.incomeTiers) as SyntheticCitizen['incomeTier'][];
   const locationKeys = Object.keys(distribution.locations) as SyntheticCitizen['location'][];
+  const casteKeys = Object.keys(distribution.castes ?? { general: 25, obc: 40, sc: 20, st: 15 }) as SyntheticCitizen['caste'][];
+  const casteWeights = Object.values(distribution.castes ?? { general: 25, obc: 40, sc: 20, st: 15 });
 
   for (let i = 0; i < size; i++) {
     const ageGroup = weightedRandom(ageGroupKeys, Object.values(distribution.ageGroups));
     const incomeTier = weightedRandom(incomeTierKeys, Object.values(distribution.incomeTiers));
     const location = weightedRandom(locationKeys, Object.values(distribution.locations));
+    const caste = weightedRandom(casteKeys, casteWeights);
 
     // Digital literacy correlates with age and income
     const ageFactor = getAgeFactor(ageGroup);
@@ -39,6 +42,7 @@ export function generatePopulation(
       ageGroup,
       incomeTier,
       location,
+      caste,
       digitalLiteracy,
       documentReadiness: clamp(documentReadiness, 0, 1),
       physicalAccessibility: clamp(physicalAccessibility, 0, 1),
@@ -334,7 +338,10 @@ function isEligible(citizen: SyntheticCitizen, criteria: Policy['eligibility']):
   const [minAge, maxAge] = ageRanges[citizen.ageGroup];
   const avgAge = (minAge + maxAge) / 2;
   
-  return avgAge >= criteria.minAge && avgAge <= criteria.maxAge;
+  const ageOk = avgAge >= criteria.minAge && avgAge <= criteria.maxAge;
+  // Empty castes array means no caste restriction (all eligible)
+  const casteOk = !criteria.castes || criteria.castes.length === 0 || criteria.castes.includes(citizen.caste);
+  return ageOk && casteOk;
 }
 
 function identifyCause(

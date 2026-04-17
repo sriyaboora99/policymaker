@@ -36,6 +36,9 @@ const defaultDistribution: PopulationDistribution = {
   locations: {
     'rural': 65, 'urban': 35,
   },
+  castes: {
+    'general': 25, 'obc': 40, 'sc': 20, 'st': 15,
+  },
   digitalLiteracyMean: 0.45,
   documentReadinessMean: 0.60,
 };
