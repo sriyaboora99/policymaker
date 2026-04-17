@@ -8,12 +8,20 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useSimulator } from '@/context/SimulatorContext';
-import { Policy, BenefitType, TrustLevel, GeographicScope } from '@/types/policy';
+import { Policy, BenefitType, TrustLevel, GeographicScope, Caste } from '@/types/policy';
 import { Save, Plus, FileText, Copy } from 'lucide-react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
+
+const ALL_CASTES: { value: Caste; label: string }[] = [
+  { value: 'general', label: 'General' },
+  { value: 'obc', label: 'OBC' },
+  { value: 'sc', label: 'SC' },
+  { value: 'st', label: 'ST' },
+];
 
 const policySchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters'),
@@ -39,6 +47,13 @@ export function PolicyDefinition() {
   const { policies, currentPolicy, addPolicy, setCurrentPolicy } = useSimulator();
   const [awarenessLevel, setAwarenessLevel] = useState(currentPolicy?.assumptions.awarenessLevel ?? 50);
   const [digitalAccessibility, setDigitalAccessibility] = useState(currentPolicy?.assumptions.digitalAccessibility ?? 60);
+  const [selectedCastes, setSelectedCastes] = useState<Caste[]>(currentPolicy?.eligibility.castes ?? []);
+
+  const toggleCaste = (caste: Caste) => {
+    setSelectedCastes(prev =>
+      prev.includes(caste) ? prev.filter(c => c !== caste) : [...prev, caste]
+    );
+  };
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<PolicyFormData>({
     resolver: zodResolver(policySchema),
@@ -87,6 +102,7 @@ export function PolicyDefinition() {
         maxAge: data.maxAge,
         maxIncome: data.maxIncome,
         occupations: [],
+        castes: selectedCastes,
       },
       documentsRequired: data.documentsRequired,
       benefitType: data.benefitType as BenefitType,
@@ -226,6 +242,27 @@ export function PolicyDefinition() {
                   max={20}
                   {...register('documentsRequired', { valueAsNumber: true })}
                 />
+              </div>
+
+              <div className="input-group sm:col-span-3">
+                <Label>Eligible Castes</Label>
+                <p className="text-xs text-muted-foreground mb-2">
+                  Select applicable categories. Leave all unchecked for no caste restriction.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  {ALL_CASTES.map(({ value, label }) => (
+                    <label
+                      key={value}
+                      className="flex items-center gap-2 cursor-pointer rounded-md border px-3 py-2 hover:border-secondary transition-colors"
+                    >
+                      <Checkbox
+                        checked={selectedCastes.includes(value)}
+                        onCheckedChange={() => toggleCaste(value)}
+                      />
+                      <span className="text-sm font-medium">{label}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
