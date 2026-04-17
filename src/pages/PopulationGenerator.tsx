@@ -56,6 +56,7 @@ export function PopulationGenerator() {
       ageGroups: ageDistribution,
       incomeTiers: incomeDistribution,
       locations: locationDistribution,
+      castes: populationDistribution.castes,
       digitalLiteracyMean: digitalLiteracy / 100,
       documentReadinessMean: documentReadiness / 100,
     };
